@@ -29,10 +29,14 @@ module.exports = {
 				main: '1fr 4fr',
 				menu: '1fr 3fr',
 			},
+			gridAutoRows: {
+				gridList: 'minmax(350px, max-content)',
+			},
 		},
 	},
 	plugins: [
 		require('@savvywombat/tailwindcss-grid-areas'),
 		require('tailwind-scrollbar')({ nocompatible: true }),
+		require('@tailwindcss/forms'),
 	],
 }

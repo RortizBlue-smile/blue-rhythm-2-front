@@ -1,7 +1,16 @@
 import React from 'react'
 import { HiRewind } from 'react-icons/hi'
-import { FaPlay, FaVolumeUp } from 'react-icons/fa'
+import { FaPlay, FaPause, FaVolumeUp } from 'react-icons/fa'
+import { ImLoop, ImShuffle } from 'react-icons/im'
+import { useDispatch, useSelector } from 'react-redux'
+import * as playerActions from '../store/musicPlayer'
+
 function MusicPlayer() {
+	const dispatch = useDispatch()
+	const playerState = useSelector((state) => state.player)
+	const handleVolume = (e) => {
+		dispatch(playerActions.changeVolume(e.target.value))
+	}
 	return (
 		<div className='grid-in-player bg-zinc-700/75 grid grid-cols-musicPlayer text-white '>
 			<div className='flex justify-start items-center gap-4 pl-4 '>
@@ -19,19 +28,40 @@ function MusicPlayer() {
 			</div>
 			<div className=' flex justify-center  gap-x-4 text-white text-lg '>
 				<div className='flex justify-center items-center gap-x-4 justify-self-center'>
+					<button
+						onClick={() => dispatch(playerActions.toggleShuffle())}
+						className={`rounded-half h-10 w-10 flex justify-center items-center   ${
+							playerState.shuffle ? 'bg-blue-700 ' : 'bg-blue-500 '
+						} hover:bg-blue-700`}
+					>
+						<i>
+							<ImShuffle />
+						</i>
+					</button>
 					<button className='rounded-half bg-blue-500 h-12 w-12 flex justify-center items-center hover:bg-blue-700'>
 						<i>
 							<HiRewind />
 						</i>
 					</button>
-					<button className='rounded-half bg-blue-500 h-16 w-16 flex justify-center items-center hover:bg-blue-700'>
-						<i>
-							<FaPlay />
-						</i>
+					<button
+						onClick={() => dispatch(playerActions.togglePlaying())}
+						className='rounded-half bg-blue-500 h-16 w-16 flex justify-center items-center hover:bg-blue-700'
+					>
+						<i>{playerState.playing ? <FaPause /> : <FaPlay />}</i>
 					</button>
 					<button className='rounded-half bg-blue-500 h-12 w-12 flex justify-center items-center hover:bg-blue-700'>
 						<i>
 							<HiRewind className='rotate-180' />
+						</i>
+					</button>
+					<button
+						onClick={() => dispatch(playerActions.toggleLoop())}
+						className={`rounded-half h-10 w-10 flex justify-center items-center ${
+							playerState.loop ? 'bg-blue-700' : 'bg-blue-500'
+						}  hover:bg-blue-700`}
+					>
+						<i>
+							<ImLoop />
 						</i>
 					</button>
 				</div>
@@ -40,11 +70,13 @@ function MusicPlayer() {
 				<i>
 					<FaVolumeUp />
 				</i>
-				<div className='w-32 h-2 bg-slate-200/20 rounded-3xl relative'>
-					<div className='w-16 h-2 bg-blue-500 rounded-3xl absolute z-10'>
-						<div className='absolute -right-1 -top-1 h-4 w-4 rounded-half bg-blue-500 hidden hover:block z-20'></div>
-					</div>
-				</div>
+
+				<input
+					type='range'
+					className='accent-blue-500'
+					onChange={handleVolume}
+					value={playerState.volume}
+				/>
 			</div>
 			<div className='text-2xl flex items-center justify-center'>
 				<span>0:00</span>

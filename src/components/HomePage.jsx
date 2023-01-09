@@ -1,16 +1,29 @@
 import React, { useEffect } from 'react'
-import { api } from '../services/apiService'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAlbums } from '../store/albums'
+import { fetchSongs } from '../store/songs'
 import { CardList } from './common/CardList'
+import LoadingSpinner from './common/LoadingSpinner'
 
 function HomePage() {
-	const callAPI = async () => {
-		api.get()
+	const dispatch = useDispatch()
+	const { list: songsList, isLoading: isLoadingSongs } = useSelector(
+		(state) => state.music.songs
+	)
+	// const { list: albumsList, isLoading: isLoadingAlbums } = useSelector(
+	// 	(state) => state.music.albums
+	// )
+	useEffect(() => {
+		dispatch(fetchSongs())
+		// dispatch(fetchAlbums())
+	}, [])
+	if (isLoadingSongs) {
+		return <LoadingSpinner />
 	}
-	useEffect(() => {}, [])
 	return (
 		<>
-			<CardList label={'Songs'} />
-			<CardList label={'Albums'} />
+			<CardList label={'Songs'} list={songsList} />
+			{/* <CardList label={'Albums'} list={songsList} /> */}
 		</>
 	)
 }

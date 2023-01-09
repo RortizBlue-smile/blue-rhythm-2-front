@@ -1,17 +1,31 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { titleLength } from '../../services/utilsService'
 
-function MusicCard({ info = '' }) {
+function MusicCard({ type = 'songs', info }) {
+	const navigate = useNavigate()
+	const handleClick = (id) => {
+		navigate(`/${type}/${id}`, { state: { info } })
+	}
+
 	return (
-		<div className='flex flex-col text-slate-100'>
-			<div className='rounded-3xl w-64 h-64 '>
+		<div className='flex flex-col text-slate-100 items-center'>
+			<div
+				className='rounded-3xl w-64 h-64 relative bg-gray-800/30 after:bg-gray-800/50  after:hidden after:absolute after:z-10 after:w-64 after:h-64 after:rounded-3xl hover:after:block hover:shadow-lg hover:scale-105 cursor-pointer'
+				onClick={() => handleClick(info.externalId)}
+			>
 				<img
-					src='https://upload.wikimedia.org/wikipedia/en/1/1c/PostMaloneRockstar.jpg'
+					src={info.albumImage}
 					alt=''
-					className='w-full h-full  rounded-3xl object-contain'
+					className='w-full h-full  rounded-3xl object-contain absolute z-0 '
 				/>
 			</div>
-			<h3 className='text-2xl'>Rockstar</h3>
-			<span className='text-lg'>Post Malone</span>
+			<h4 className={`text-center text-${titleLength(info.name)}`}>
+				{info.name}
+			</h4>
+			<span className='text-lg text-black/40 text-center mb-4'>
+				{info.artist}
+			</span>
 		</div>
 	)
 }

@@ -1,5 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import basic from './basic'
+import musicReducer from './music'
+import musicPlayerReducer from './musicPlayer'
+import authReducer from './auth'
 export const store = configureStore({
-	reducer: { basic },
+	reducer: {
+		player: musicPlayerReducer,
+		music: musicReducer,
+		auth: authReducer,
+	},
 })

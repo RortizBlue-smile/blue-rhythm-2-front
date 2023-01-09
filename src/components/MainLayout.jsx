@@ -9,7 +9,7 @@ function MainLayout() {
 				<SearchBar />
 			</div>
 			<div
-				className='p-8 pt-0 pb-0 overflow-y-auto scrollbar-thin scrollbar-track-slate-300 scrollbar-thumb-slate-600  scrollbar-track-rounded-3xl scrollbar-thumb-rounded-3xl
+				className='px-8  overflow-y-auto scrollbar-thin scrollbar-track-slate-300 scrollbar-thumb-slate-600  scrollbar-track-rounded-3xl scrollbar-thumb-rounded-3xl
 			'
 			>
 				<Outlet />
