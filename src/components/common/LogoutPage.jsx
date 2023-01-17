@@ -8,7 +8,7 @@ function LogoutPage() {
 	useEffect(() => {
 		dispatch(logOut())
 	}, [])
-	return <Navigate to='Home' />
+	return <Navigate to='/' />
 }
 
 export { LogoutPage }

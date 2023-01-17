@@ -1,10 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { api } from '../services/apiService'
-import { decodeToken } from '../services/utilsService'
+import {
+	decodeToken,
+	getToken,
+	removeToken,
+	saveToken,
+} from '../services/utilsService'
+
+const token = getToken()
 
 const initialState = {
-	user: null,
-	token: null,
+	user: token ? decodeToken(token) : null,
+	token: token ?? null,
 	status: 'idle',
 }
 
@@ -37,11 +44,13 @@ const authSlice = createSlice({
 		logOut: (state, action) => {
 			state.user = null
 			state.token = null
+			removeToken()
 		},
 		resetStatus: (state, action) => {
 			state.status = 'idle'
 		},
 		changeAvatar: (state, action) => {
+			console.log(action.payload)
 			state.user.avatar = action.payload
 		},
 	},
@@ -57,6 +66,7 @@ const authSlice = createSlice({
 				state.user = decodeToken(action.payload.token)
 				state.token = action.payload.token
 				state.status = 'success'
+				saveToken(action.payload.token)
 			})
 			.addCase(register.fulfilled, (state, action) => {
 				state.status = 'success'

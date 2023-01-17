@@ -5,12 +5,7 @@ cosas que me faltan
 - Row list
 - Song Page
 - Album Page
-- Login form
-- Register form
 
 # Redux
 
-- Canciones
-- albumes
-- auth
--
+- Player

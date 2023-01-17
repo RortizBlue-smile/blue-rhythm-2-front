@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, Navigate, NavLink } from 'react-router-dom'
 import { FaHome, FaMusic } from 'react-icons/fa'
 import { RiPlayList2Fill } from 'react-icons/ri'
-import { BiAlbum } from 'react-icons/bi'
 import { NavButton } from './common/NavButton'
 import { useSelector } from 'react-redux'
 
@@ -28,7 +27,13 @@ function Menu() {
 				</div>
 				<div className=''>
 					<h2 className='text-2xl text-slate-100'>
-						{isLoggedIn ? `${user.name}` : 'Rhythm 2'}
+						{isLoggedIn ? (
+							<Link to='/profile' className='hover:underline'>
+								{user.name}
+							</Link>
+						) : (
+							'Rhythm 2'
+						)}
 					</h2>
 					<span className='text-slate-300'>
 						{isLoggedIn ? (
@@ -66,7 +71,7 @@ function Menu() {
 const navItems = [
 	{ nav: '/', name: 'Home', icon: <FaHome /> },
 	{ nav: '/songs', name: 'Songs', icon: <FaMusic /> },
-	{ nav: '/albums', name: 'Albums', icon: <BiAlbum /> },
+	// { nav: '/albums', name: 'Albums', icon: <BiAlbum /> },
 	{ nav: '/playlists', name: 'Playlist', icon: <RiPlayList2Fill /> },
 ]
 export { Menu }

@@ -23,6 +23,8 @@ module.exports = {
 				layout: 'minmax(250px, 1fr) 3fr 1fr',
 				musicPlayer: 'minmax(250px, 1fr) 2fr 1fr 1fr',
 				gridList: 'repeat(auto-fit, minmax(256px, 1fr))',
+				songInfo: '350px 1fr ',
+				rowList: '4fr 1fr',
 			},
 			gridTemplateRows: {
 				layout: `1fr 1fr 100px`,

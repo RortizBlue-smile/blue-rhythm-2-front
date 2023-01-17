@@ -7,15 +7,16 @@ function MusicCard({ type = 'songs', info }) {
 	const handleClick = (id) => {
 		navigate(`/${type}/${id}`, { state: { info } })
 	}
-
 	return (
 		<div className='flex flex-col text-slate-100 items-center'>
 			<div
 				className='rounded-3xl w-64 h-64 relative bg-gray-800/30 after:bg-gray-800/50  after:hidden after:absolute after:z-10 after:w-64 after:h-64 after:rounded-3xl hover:after:block hover:shadow-lg hover:scale-105 cursor-pointer'
-				onClick={() => handleClick(info.externalId)}
+				onClick={() =>
+					handleClick(info.externalId ?? info.artistId ?? info.albumIdw)
+				}
 			>
 				<img
-					src={info.albumImage}
+					src={info.albumImage ?? info?.images[1]?.url ?? ''}
 					alt=''
 					className='w-full h-full  rounded-3xl object-contain absolute z-0 '
 				/>

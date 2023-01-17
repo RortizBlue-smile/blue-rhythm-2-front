@@ -14,15 +14,32 @@ const getTimeDiff = (date) => {
 	return diff.toObject()
 }
 
+const formatAudioTime = (audioTime = 0) => {
+	audioTime ||= 0
+	const totalTime = Math.round(audioTime)
+	return `00:${totalTime < 10 ? '0' : ''}${totalTime}`
+}
+
 const saveToken = (token) => {
-	localStorage.set('token', token)
+	localStorage.setItem('token', token)
 }
 const getToken = () => {
-	return localStorage.get('token')
+	return localStorage.getItem('token')
+}
+const removeToken = () => {
+	localStorage.removeItem('token')
 }
 const decodeToken = (token) => {
 	const decodedToken = jwtDecode(token)
 	return decodedToken
 }
 
-export { titleLength, getTimeDiff, decodeToken, getToken, saveToken }
+export {
+	titleLength,
+	getTimeDiff,
+	decodeToken,
+	getToken,
+	saveToken,
+	removeToken,
+	formatAudioTime,
+}

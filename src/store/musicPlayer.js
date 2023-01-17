@@ -6,19 +6,30 @@ const initialState = {
 	playing: false,
 	loop: false,
 	shuffle: false,
-	volumeLevel: 100,
-	actualSong: {
+	volumeLevel: 25,
+	isChanching: false,
+	currentSong: {
 		name: '',
 		artist: '',
 		image: '',
-		time: 0,
+		link: '',
 	},
+	index: null,
 }
 
 const musicPlayer = createSlice({
 	name: 'musicPlayer',
 	initialState,
 	reducers: {
+		resetIndex: (state, action) => {
+			state.index = null
+		},
+		resetSong: (state) => {
+			state.currentSong = null
+		},
+		changeSong: (state) => {
+			state.isChanching = true
+		},
 		togglePlaying: (state, action) => {
 			state.playing = !state.playing
 		},
@@ -28,14 +39,69 @@ const musicPlayer = createSlice({
 		toggleShuffle: (state, action) => {
 			state.shuffle = !state.shuffle
 		},
-		nextSong: (state, action) => {},
+		toggleLoading: (state, action) => {
+			state.isLoading = !state.isLoading
+		},
+		play: (state, action) => {
+			state.playing = false
+			const { songList } = action.payload
+			Array.isArray(songList)
+				? (state.actualPlaylist = action.payload.songList)
+				: (state.actualPlaylist = [action.payload.songList])
+			state.shuffleOrder = []
+			state.currentSong = songList[0]
+			state.index = 0
+		},
+		addToList: (state, action) => {
+			state.actualPlaylist.push(...action.payload.songList)
+		},
+		nextSong: (state) => {
+			state.playing = false
+			if (state.index < state.actualPlaylist.length - 1) {
+				state.index += 1
+			} else {
+				state.index = 0
+			}
+			state.currentSong = state.actualPlaylist[state.index]
+		},
+		autoNext: (state) => {
+			state.playing = false
+			if (state.index < state.actualPlaylist.length - 1) {
+				state.index += 1
+			} else if (state.loop) {
+				state.index = 0
+			}
+			state.currentSong = state.actualPlaylist[state.index]
+		},
+		prevSong: (state) => {
+			state.playing = false
+			if (state.index - 1 < 0) {
+				state.index = state.actualPlaylist.length - 1
+			} else {
+				state.index = 0
+			}
+			state.currentSong = state.actualPlaylist[state.index]
+		},
 		changeVolume: (state, action) => {
 			state.volumeLevel = action.payload
 		},
 	},
 })
 
-export const { togglePlaying, toggleShuffle, toggleLoop, changeVolume } =
-	musicPlayer.actions
+export const {
+	resetIndex,
+	resetSong,
+	togglePlaying,
+	toggleShuffle,
+	toggleLoop,
+	toggleLoading,
+	changeVolume,
+	changeSong,
+	play,
+	addToList,
+	nextSong,
+	autoNext,
+	prevSong,
+} = musicPlayer.actions
 
 export default musicPlayer.reducer

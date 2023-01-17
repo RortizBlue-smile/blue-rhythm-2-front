@@ -2,15 +2,18 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { AlbumsPage } from './components/AlbumsPage'
 import { PrivateRoute, PublicRoute } from './components/common/AuthRoute'
 import { LogoutPage } from './components/common/LogoutPage'
-import { PlaylistsPage } from './components/common/PlaylistsPage'
+import { PlaylistsPage } from './components/PlaylistsPage'
 import { HomePage } from './components/HomePage'
 import { LoginPage } from './components/LoginPage'
 import { MainLayout } from './components/MainLayout'
 import { Menu } from './components/Menu'
 import { MusicPlayer } from './components/MusicPlayer'
 import { RegisterPage } from './components/RegisterPage'
+import { SearchPage } from './components/SearchPage'
 import { SongInfoPage } from './components/SongInfoPage'
 import { SongsPage } from './components/SongsPage'
+import { ProfilePage } from './components/ProfilePage'
+import { PlayListInfoPage } from './components/PlaylistInfoPage'
 
 function App() {
 	return (
@@ -28,7 +31,26 @@ function App() {
 							</PrivateRoute>
 						}
 					/>
-					<Route path='albums' element={<AlbumsPage />} />
+					<Route path='albums' element={<AlbumsPage />}>
+						<Route
+							path='albums/:id'
+							element={
+								<PrivateRoute>
+									<SongInfoPage />
+								</PrivateRoute>
+							}
+						/>
+					</Route>
+
+					<Route
+						path='artists/:id'
+						element={
+							<PrivateRoute>
+								<SongInfoPage />
+							</PrivateRoute>
+						}
+					/>
+
 					<Route
 						path='playlists'
 						element={
@@ -36,12 +58,20 @@ function App() {
 								<PlaylistsPage />
 							</PrivateRoute>
 						}
+					></Route>
+					<Route
+						path='playlists/:id'
+						element={
+							<PrivateRoute>
+								<PlayListInfoPage />
+							</PrivateRoute>
+						}
 					/>
 					<Route
 						path='search'
 						element={
 							<PrivateRoute>
-								<PlaylistsPage />
+								<SearchPage />
 							</PrivateRoute>
 						}
 					/>
@@ -67,6 +97,14 @@ function App() {
 							<PublicRoute>
 								<RegisterPage />
 							</PublicRoute>
+						}
+					/>
+					<Route
+						path='profile'
+						element={
+							<PrivateRoute>
+								<ProfilePage />
+							</PrivateRoute>
 						}
 					/>
 				</Route>
