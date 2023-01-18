@@ -12,7 +12,7 @@ function NextButton({ songList }) {
 	}
 	return (
 		<button
-			className='rounded-half bg-blue-500 w-16 h-16 text-2xl text-white flex justify-center items-center hover:bg-blue-700 disabled:hover:bg-blue-700'
+			className='rounded-half bg-blue-500 w-16 h-16 text-2xl text-white flex justify-center items-center hover:bg-blue-700 disabled:hover:bg-blue-700 mobile:w-12 mobile:h-12 mobile:text-base'
 			disabled={selected}
 			onClick={handleClick}
 		>

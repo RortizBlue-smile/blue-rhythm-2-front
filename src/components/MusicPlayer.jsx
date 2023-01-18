@@ -80,14 +80,14 @@ function MusicPlayer() {
 	}
 
 	return (
-		<div className='grid-in-player bg-zinc-700/75 grid grid-cols-musicPlayer text-white '>
-			<div className='flex justify-start items-center gap-4 pl-4 '>
-				<div className='w-16 h-16 bg-white'>
+		<div className='sm:grid-in-player bg-zinc-700/75 grid grid-cols-musicPlayer text-white mobile:fixed mobile:bottom-0 mobile:flex mobile:justify-center mobile:z-20 mobile:w-full mobile:h-24'>
+			<div className='flex justify-start items-center gap-4 pl-4  mobile:hidden'>
+				<div className='w-16 h-16 bg-white '>
 					{playerState.currentSong.albumImage && (
 						<img
 							src={playerState.currentSong.albumImage}
 							alt=''
-							className='w-full h-full'
+							className='w-full h-full '
 						/>
 					)}
 				</div>
@@ -165,7 +165,7 @@ function MusicPlayer() {
 					</button>
 				</div>
 			</div>
-			<div className='flex items-center justify-between justify-self-end gap-3'>
+			<div className='flex items-center justify-between justify-self-end gap-3 mobile:hidden'>
 				<i>
 					<FaVolumeUp />
 				</i>
@@ -179,10 +179,12 @@ function MusicPlayer() {
 					max={100}
 				/>
 			</div>
-			<div className='text-2xl flex items-center justify-center'>
+			<div className='text-2xl flex items-center justify-center mobile:ml-3'>
 				<span className={``}>{formatAudioTime(songProgress)}</span>
-				<span>/</span>
-				<span>{formatAudioTime(audio.current.duration)}</span>
+				<span className='mobile:hidden'>/</span>
+				<span className='mobile:hidden'>
+					{formatAudioTime(audio.current.duration)}
+				</span>
 			</div>
 		</div>
 	)

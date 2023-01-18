@@ -5,6 +5,7 @@ import { titleLength } from '../../services/utilsService'
 function MusicCard({ type = 'songs', info }) {
 	const navigate = useNavigate()
 	const handleClick = (id) => {
+		if (type !== 'songs') return
 		navigate(`/${type}/${id}`, { state: { info } })
 	}
 	return (
@@ -12,7 +13,7 @@ function MusicCard({ type = 'songs', info }) {
 			<div
 				className='rounded-3xl w-64 h-64 relative bg-gray-800/30 after:bg-gray-800/50  after:hidden after:absolute after:z-10 after:w-64 after:h-64 after:rounded-3xl hover:after:block hover:shadow-lg hover:scale-105 cursor-pointer'
 				onClick={() =>
-					handleClick(info.externalId ?? info.artistId ?? info.albumIdw)
+					handleClick(info.externalId ?? info.artistId ?? info.albumId ?? '')
 				}
 			>
 				<img

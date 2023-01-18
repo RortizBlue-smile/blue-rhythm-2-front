@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAlbums } from '../store/albums'
+import { fetchPlaylists } from '../store/playlists'
 import { fetchSongs } from '../store/songs'
 import { CardList } from './common/CardList'
 import LoadingSpinner from './common/LoadingSpinner'
@@ -15,7 +16,6 @@ function HomePage() {
 	// )
 	useEffect(() => {
 		dispatch(fetchSongs())
-		// dispatch(fetchAlbums())
 	}, [])
 	if (isLoadingSongs) {
 		return <LoadingSpinner />

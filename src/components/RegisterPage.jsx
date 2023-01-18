@@ -26,7 +26,7 @@ function RegisterPage() {
 			<h2 className='text-3xl text-white mb-2'>Register</h2>
 			<form
 				onSubmit={handleSubmit(handleRegister)}
-				className='bg-gradient-to-br from-darkBlue1/50 to-darkBlue2/50 rounded-3xl py-4 px-8 w-1/2 flex flex-col gap-y-4'
+				className='bg-gradient-to-br from-darkBlue1/50 to-darkBlue2/50 rounded-3xl py-4 px-8 w-1/2 flex flex-col gap-y-4 mobile:w-full'
 			>
 				<InputField title='Name' name='name' register={register} />
 				<InputField title='Last Name' name='surname' register={register} />

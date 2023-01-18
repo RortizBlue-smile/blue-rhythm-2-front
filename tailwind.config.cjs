@@ -18,6 +18,7 @@ module.exports = {
 			},
 			gridTemplateAreas: {
 				layout: ['menu main main', 'menu main main', 'player player player'],
+				layoutSM: ['main ', 'mainn', 'player'],
 			},
 			gridTemplateColumns: {
 				layout: 'minmax(250px, 1fr) 3fr 1fr',
@@ -25,14 +26,25 @@ module.exports = {
 				gridList: 'repeat(auto-fit, minmax(256px, 1fr))',
 				songInfo: '350px 1fr ',
 				rowList: '4fr 1fr',
+				layoutMob: 'minmax(320px, 1fr)',
+				musicPlayerMob: 'minmax(200px, 1fr) 1fr',
 			},
 			gridTemplateRows: {
 				layout: `1fr 1fr 100px`,
 				main: '1fr 4fr',
 				menu: '1fr 3fr',
+				mainMob: '150px 1fr',
 			},
 			gridAutoRows: {
 				gridList: 'minmax(350px, max-content)',
+			},
+			screens: {
+				mobile: {
+					max: '640px',
+				},
+				// desktopMini: {
+				// 	max: '1000px',
+				// },
 			},
 		},
 	},

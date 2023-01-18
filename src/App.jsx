@@ -14,10 +14,17 @@ import { SongInfoPage } from './components/SongInfoPage'
 import { SongsPage } from './components/SongsPage'
 import { ProfilePage } from './components/ProfilePage'
 import { PlayListInfoPage } from './components/PlaylistInfoPage'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { fetchPlaylists } from './store/playlists'
 
 function App() {
+	const dispatch = useDispatch()
+	useEffect(() => {
+		dispatch(fetchPlaylists())
+	}, [])
 	return (
-		<div className='grid font-ubuntu grid-areas-layout grid-cols-layout grid-rows-layout h-screen bg-gradient-to-br from-blue-600 to-cyan-300 '>
+		<div className='sm:grid font-ubuntu sm:grid-areas-layout grid-cols-layout sm:grid-rows-layout sm:h-screen bg-gradient-to-br from-blue-600 h-full to-cyan-300 mobile:relative mobile:overflow-auto'>
 			<Menu />
 			<Routes>
 				<Route path='/' element={<MainLayout />}>
