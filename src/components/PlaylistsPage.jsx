@@ -26,6 +26,10 @@ function PlaylistsPage() {
 			dispatch(resetUpdating())
 		}
 	}, [isUpdating])
+	useEffect(() => {
+		dispatch(fetchPlaylists())
+		dispatch(fetchPublicPlaylists())
+	}, [])
 	const toggleAddPlaylist = () => {
 		setActiveAddForm((prev) => !prev)
 	}
